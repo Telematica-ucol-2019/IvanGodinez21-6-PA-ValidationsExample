@@ -8,14 +8,27 @@ namespace App.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propeprtyName = "")
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            var changed = PropertyChanged;
-            if (changed == null) return;
-            changed.Invoke(this, new PropertyChangedEventArgs(propeprtyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
+        protected void SetValue<T>(ref T backingFieled, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingFieled, value))
+            {
+                return;
+            }
+            backingFieled = value;
+            OnPropertyChanged(propertyName);
+        }
+        protected virtual void OnPropertyChangeds([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

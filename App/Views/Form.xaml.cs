@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace App.Views
         public Form()
         {
             InitializeComponent();
+            BindingContext = new FormViewModel();
         }
     }
 }

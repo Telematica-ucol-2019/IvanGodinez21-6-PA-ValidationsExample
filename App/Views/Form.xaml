@@ -2,31 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:App.Models"
-             xmlns:vm="clr-namespace:App.ViewModels"
+             xmlns:vm="clr-namespace:App.ViewModels" x:DataType="vm:FormViewModel"
              x:Class="App.Views.Form"
              x:Name="thisForm"
-             Title="Form"
-             >
-    <ContentPage.BindingContext>
-        <vm:ExampleViewModel/>
-    </ContentPage.BindingContext>
+             Title="Form">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome please fill the following form" FontSize="Large" HorizontalOptions="Center"/>
             <Frame>
                 <StackLayout>
                     <Entry x:Name="inpName"
+                           Text="{Binding inpNameText, Mode=TwoWay}"
                            Placeholder="Name"/>
                     <Entry x:Name="inpAge"
+                           Text="{Binding inpAgeText, Mode=TwoWay}"
                            Placeholder="Age"
-                           HorizontalOptions="StartAndExpand"/>
+                           Keyboard="Numeric"
+                           HorizontalOptions="StartAndExpand">
+                    </Entry>
                 </StackLayout>
             </Frame>
             <Button x:Name="btnContinue"
                     Text="Continue"
                     TextColor="White"
                     BackgroundColor="DodgerBlue"
-                    HorizontalOptions="End"/>
+                    HorizontalOptions="End"
+                    Command="{Binding cmdBtnContinue}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

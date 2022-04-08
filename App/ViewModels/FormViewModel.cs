@@ -40,7 +40,7 @@ namespace App.ViewModels
         #region Methods
         private void checkValidations()
         {
-            if (inpNameText != null || inpAgeText != null)
+            if ((inpNameText != null && inpNameText != "") && (inpAgeText != null && inpAgeText != ""))
             {
                 if (inpNameText.ToString().Length < 20 && inpNameText.ToString().Length > 0 && Enumerable.Range(20, 31).Contains(int.Parse(inpAgeText)))
                 {
